@@ -222,4 +222,64 @@ print("Saldiri Gücü: ", dobby.saldiriGucu)
 dobby.savasBaslat()
 
 
+/* Closure Nedir?
+ Metodun içindeki kod bloğudur. Ancak, closure'lar, isimsiz olarak tanımlanabilir.
+ Başka bir fonksiyonun içinde veya bir değişkenin değeri olarak kullanılabilirler.
+ 
+ Format:
+ {
+ (parameters) -> ReturnType in
+    Closure body
+ }
+ */
 
+// Fonksiyon
+func sum(num1: Int, num2: Int) -> Int {
+    return num1 + num2
+}
+
+sum(num1: 5, num2: 4)
+
+// myFunction -> (Int, Int) -> Int
+
+func calculate (num1: Int, num2: Int, myFunction: (Int, Int) -> Int) -> Int {
+    return myFunction (num1, num2)
+}
+
+// sum fonksiyonunu farklı bir fonksiyona parametre olarak alma
+calculate(num1: 4, num2: 5, myFunction: sum)
+
+/* aşağıdaki closure'ı calculate fonksiyonunun içine alalım
+{(num1: Int, num2: Int) -> Int in
+        return num1 * num2
+    
+}
+*/
+
+calculate(num1: 5, num2: 6, myFunction: {(num1: Int, num2: Int) -> Int in
+    return num1 * num2
+
+})
+//swift num1 ve num2 değerlerininve çarpım sonucunun da int olduğunu algıladığı için Int yazmaya gerek yok
+
+calculate(num1: 5, num2: 6, myFunction: {(num1, num2) in
+    return num1 * num2
+
+})
+
+//return yazmaya da gerek yok
+calculate(num1: 5, num2: 6, myFunction: {(num1, num2) in num1 * num2})
+
+// num1: $0, num2: $1 yazılabilir
+calculate(num1: 5, num2: 5, myFunction: {$0 * $1})
+
+// closure ile dizi ve fonksiyon kullanımı
+let myArray = [10, 20, 30, 40, 50]
+
+func divideFunction(arrayNum: Int) -> Int {
+    return arrayNum / 5
+}
+
+print(myArray.map(divideFunction))
+
+print(myArray.map({$0 / 10}))
