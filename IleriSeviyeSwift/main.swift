@@ -178,4 +178,48 @@ switch gunSayisi {
 print("Switch-Case: ", gunStringi)
 
 
+/* Protokol Nedir?
+ - Swift'te "protocol" (protokol), bir sınıf, yapı veya enum gibi belirli bir türün davranışlarını belirlemek için kullanılan bir yapıdır.
+ - Protokoller, belirli bir metod, özellik veya diğer gereksinimlerin bir kombinasyonunu tanımlayarak bir "arayüz" oluştururlar.
+ -
+ */
+
+// "Karakter" adında bir protokol tanımlandı. Herhangi bir tür, bu protokolü uygulayarak,saldiriGucu adında özelliği ve savasBaslat() adında bir metodunu sağlamak zorundadır.
+
+protocol Karakter {
+    var saldiriGucu: Int {get}
+    func savasBaslat()
+}
+// Struct'lar kalıtımı sınıflandan alamıyor fakat protokollerden alabiliyor.
+
+struct Batman : Karakter {
+
+    var saldiriGucu: Int = 100
+    
+    func savasBaslat() {
+        print("Savaş Başladı")
+    }
+}
+
+// Sınıflarda hem kalıtım hem de da protokol kullanılabilir
+
+class Animal {
+    func running(){
+        print("Koşuyor")
+    }
+}
+
+class Cat: Animal, Karakter{
+    var saldiriGucu: Int = 20
+    
+    func savasBaslat() {
+        print("Savaş Başladi")
+    }
+}
+let dobby = Cat()
+dobby.running()
+print("Saldiri Gücü: ", dobby.saldiriGucu)
+dobby.savasBaslat()
+
+
 
